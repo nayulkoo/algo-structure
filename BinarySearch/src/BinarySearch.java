@@ -8,6 +8,7 @@
 public class BinarySearch {
 
 	private static int times = 0;
+	private static int rTimes = 0;
 
 	private static int binarySearch(int[] arr, int target) {
 		int size = arr.length;
@@ -35,13 +36,38 @@ public class BinarySearch {
 			return -1;
 		}
 	}
+	private static int binarySearchR(int[] arr, int start, int end, int target) {
+		int size = arr.length;
+		if (size == 0) {
+			return -1;
+		} else {
+			if (start > end) {
+				return -1;
+			}
+			rTimes++;
+			int mid = (start + end) / 2;
+			if (arr[mid] == target) {
+				return mid;
+			} else if (arr[mid] < target) {
+				return binarySearchR(arr, mid + 1, end, target);
+			} else {
+				return binarySearchR(arr, start, mid - 1, target);
+			}
+		}
+	}
 
 	public static void main(String[] args) {
 		int[] arr = new int[] { 1, 2, 3, 7, 9, 12, 21, 23, 27, 30, 35, 38 };
-		int foundIndex = binarySearch(arr, 38);
+		int target = 27;
+		
 		System.out.println("size : " + arr.length); // size
+		int foundIndex = binarySearch(arr, target);
 		System.out.println("found : " + foundIndex);
-		System.out.println("times : " + times); // operations
+		System.out.println("loop times : " + times); // loop operations
+		
+		int foundRIndex = binarySearchR(arr, 0, arr.length - 1, target);
+		System.out.println("foundR : " + foundRIndex);
+		System.out.println("recursion times : " + rTimes); // recursion operations
 	}
 
 }
