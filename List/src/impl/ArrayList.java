@@ -102,6 +102,14 @@ public class ArrayList<T> extends List<T> {
 	}
 	
 	@Override
+	public void set(int index, T data) {
+		if (index < 0 || index > size) {
+			throw new ArrayIndexOutOfBoundsException(String.format("Index : %d, Size : %d", index, size));
+		}
+		ar[index] = data;
+	}
+	
+	@Override
 	public int indexOf(Object o) {
 		for (int i = 0; i < size; i++) {
 			if (ar[i].equals(o)) {
@@ -148,6 +156,42 @@ public class ArrayList<T> extends List<T> {
 				throw new UnsupportedAddressTypeException();
 			}
 		};
+	}
+	
+	@Override
+	public boolean contains(T data) {
+		for (int i = 0; i < ar.length; i++) {
+			if (ar[i].equals(data)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public T[] toArray() {
+		T[] arr = (T[]) new Object[size];
+		for (int i = 0; i < size; i++) {
+			arr[i] = ar[i];
+		}
+		return arr;
+	}
+	
+	@Override
+	public T[] toArray(T[] arr) {
+		for (int i = 0; i < arr.length; i++) {
+			arr[i] = ar[i];
+		}
+		return arr;
+	}
+	
+	@Override
+	public void trimToSize() {
+		T[] temp = (T[]) new Object[size];
+		for (int i = 0; i < ar.length; i++) {
+			temp[i] = ar[i];
+		}
+		ar = temp;
 	}
 	
 	@Override

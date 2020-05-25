@@ -3,7 +3,7 @@ import impl.List;
 
 public class ArrayListImplement {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws CloneNotSupportedException {
 		List<String> myList = new ArrayList<String>();
 		myList.add("1");
 		myList.add("2");
@@ -17,8 +17,7 @@ public class ArrayListImplement {
 		addList.add("9");
 		myList.addAll(5, addList);
 		System.out.println(myList);
-		myList.clear();
-		System.out.println(myList);
+		System.out.println(myList.clone());
 	}
 
 }
